@@ -20,7 +20,7 @@ GREEN = (0, 255, 0)
 # Snake and food properties
 snake_block = 20
 snake_speed = 15
-#sex;
+#  sex;
 # Initialize clock
 clock = pygame.time.Clock()
 
