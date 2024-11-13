@@ -8,11 +8,11 @@ from IPython.display import clear_output
 AUTOTUNE = tf.data.AUTOTUNE
 
 # Define paths
-dataset_dir = 'dataset'
-trainA_path = os.path.join(dataset_dir, 'train/content_train')
-trainB_path = os.path.join(dataset_dir, 'train/style_train')
-testA_path = os.path.join(dataset_dir, 'test/content_test')
-testB_path = os.path.join(dataset_dir, 'test/style_test')
+dataset_dir = "dataset"
+trainA_path = "train/content_train"
+trainB_path = "train/style_train"
+testA_path = "test/content_test"
+testB_path = "test/style_test"
 
 # Function to load and preprocess images
 def load_image(image_file):
