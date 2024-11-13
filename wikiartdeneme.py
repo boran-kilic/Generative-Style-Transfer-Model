@@ -36,16 +36,15 @@ if filtered_dfs:
 else:
     print("No images found for artist ID 22")
 
-""" # Load the Parquet file
-df = pd.read_parquet('wikiart/data/train-00000-of-00072.parquet')
-print(df.head()) """
-# Get the first image bytes
-""" first_image_bytes = df.iloc[1]['image']['bytes']  # Assuming 'bytes' is the column name """
-""" filtered_df = df[df['artist'] == 22]
-print(filtered_df.head()) """
-# Convert bytes to image
-""" image = Image.open(io.BytesIO(first_image_bytes))
+# # Load the Parquet file
+# df = pd.read_parquet('wikiart/data/train-00000-of-00072.parquet')
+# print(df.head())
 
-# Display the image
-image.show()  # This will open the image in your default image viewer
- """
+# first_image_bytes = df.iloc[1]['image']['bytes']  # Assuming 'bytes' is the column name
+# filtered_df = df[df['artist'] == 22]
+# print(filtered_df.head())
+
+# image = Image.open(io.BytesIO(first_image_bytes))
+
+# # Display the image
+# image.show()  # This will open the image in your default image viewer
