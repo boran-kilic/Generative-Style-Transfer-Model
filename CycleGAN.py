@@ -86,7 +86,6 @@ def preprocess_image_test(image):
   return image
 
 
-
 train_content = train_content.cache().map(
     preprocess_image_train, num_parallel_calls=AUTOTUNE).shuffle(
     BUFFER_SIZE).batch(BATCH_SIZE)
