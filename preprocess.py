@@ -8,19 +8,16 @@ from IPython.display import clear_output
 AUTOTUNE = tf.data.AUTOTUNE
 
 # Define paths
-dataset_dir = "dataset"
+
 trainA_path = "train/content_train"
-trainB_path = "train/style_train"
+trainB_path = "train/van_gogh_train"
 testA_path = "test/content_test"
-testB_path = "test/style_test"
+testB_path = "test/van_gogh_test"
 
 # Function to load and preprocess images
 def load_image(image_file):
     image = tf.io.read_file(image_file)
     image = tf.image.decode_jpeg(image, channels=3)
-    image = tf.image.resize(image, [286, 286])
-
-    image = (image / 127.5) - 1  # Normalize to [-1, 1] 
     return image
 
 # Function to load dataset from a directory
@@ -62,7 +59,7 @@ def random_crop(image):
 # normalizing the images to [-1, 1]
 def normalize(image):
   image = tf.cast(image, tf.float32)
-#   image = (image / 127.5) - 1
+  image = (image / 127.5) - 1
   return image
 
 def random_jitter(image):
@@ -101,7 +98,19 @@ test_content = test_content.map(
 test_style = test_style.map(
     preprocess_image_test, num_parallel_calls=AUTOTUNE).cache().shuffle(
     BUFFER_SIZE).batch(BATCH_SIZE)
-    
+OUTPUT_PATH = "preprocessed_dataset_van_gogh"
+
+# Create directories for saving datasets
+for dir_name in ['train_content', 'train_style', 'test_content', 'test_style']:
+    os.makedirs(os.path.join(OUTPUT_PATH, dir_name), exist_ok=True)
+
+# Save preprocessed datasets
+tf.data.experimental.save(train_content, os.path.join(OUTPUT_PATH, 'train_content'))
+tf.data.experimental.save(train_style, os.path.join(OUTPUT_PATH, 'train_style'))
+tf.data.experimental.save(test_content, os.path.join(OUTPUT_PATH, 'test_content'))
+tf.data.experimental.save(test_style, os.path.join(OUTPUT_PATH, 'test_style'))
+
+print("Datasets saved successfully!")    
 sample_content = next(iter(train_content))
 sample_style = next(iter(train_style))    
 
@@ -130,4 +139,5 @@ plt.imshow(tf.cast(random_jitter(sample_style[0]) * 0.5 + 0.5, tf.float32))
 
 plt.show()
 
-    
+
+   
